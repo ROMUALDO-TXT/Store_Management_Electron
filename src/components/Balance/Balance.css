@@ -1,0 +1,33 @@
+.balance {
+    margin: 15% auto 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    font-size: x-large;
+}
+
+.balance .normal {
+    width: 210px;
+    height: 120px;
+    background: rgb(255, 250, 254);
+    padding: 8px 32px 24px 32px;
+    border-radius: 4px;
+    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.308);
+}
+
+.balance header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px auto;
+}
+
+.balance .green {
+    height: 120px;
+    background: #33cc95;
+    width: 210px;
+    padding: 8px 32px 24px 32px;
+    border-radius: 4px;
+    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.308);
+
+}

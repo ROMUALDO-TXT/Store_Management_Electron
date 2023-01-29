@@ -1,0 +1,44 @@
+.Navbar {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    position: fixed;
+    margin: 0 auto;
+    background-color: #ec5990;
+    z-index: 1;
+}
+
+.navbar-menu {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    height: 80px;
+}
+
+.Navbar .button-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar--logo {
+    width: max-content;
+    min-width: 20%;
+}
+
+.logo {
+    width: 120px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.navbar-title {
+    margin-top: 20px;
+}
+
+.navbar-title h1 {
+    font-weight: 600;
+    text-shadow: 1px 1px #00000031;
+    color: #f5e6eb;
+}
