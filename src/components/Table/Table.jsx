@@ -3,7 +3,7 @@ import cancel from '../../assets/cancel.svg';
 import plus from '../../assets/plus.svg';
 
 
-export default function Table() {
+export default function Table({ onRequestOpen }) {
 
     const transactions = [{
         id: 1,
@@ -24,7 +24,7 @@ export default function Table() {
                         <th>Valor</th>
                         <th>Categoria</th>
                         <th>Data</th>
-                        <th className='add-th'><button className='add' onClick="Add"> <img className='add-icon' width="24px" height="24px" alt='adicionar' src={plus} />&nbsp;Novo</button></th>
+                        <th className='add-th'><button className='add' onClick={onRequestOpen}> <img className='add-icon' width="24px" height="24px" alt='adicionar' src={plus} />&nbsp;Novo</button></th>
                     </tr>
                 </thead>
                 <tbody>
