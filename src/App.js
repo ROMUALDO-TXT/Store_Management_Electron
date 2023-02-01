@@ -1,16 +1,31 @@
-import { useContext, useState } from 'react';
-import { DatabaseContext } from './context/DatabaseContext'
+import { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import { Balance } from './components/Balance/Balance';
 import Table from './components/Table/Table';
 import { NewTransaction } from './components/NewTransaction/NewTransaction';
 import Modal from 'react-modal';
+import { useDatabase } from './context/DatabaseContext';
 
 Modal.setAppElement('#root')
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+
+  const { fetch } = useDatabase();
+
+  useEffect(() => {
+    fetch({
+      schema: 'transactions'
+    }).then((result) => {
+      if (result && result.length > 0) {
+        // result
+        setTransactions(result)
+      }
+    });
+  }, [fetch])
+
 
   function handleOpenModal() {
     setIsOpen(true);
@@ -20,15 +35,11 @@ export default function App() {
     setIsOpen(false);
   }
 
-
-  const { database } = useContext(DatabaseContext);
-  console.log(database);
-
   return (
     <div className="app">
       <Navbar />
-      <Balance />
-      <Table onRequestOpen={handleOpenModal} />
+      <Balance transactions={transactions} />
+      <Table onRequestOpen={handleOpenModal} transactions={transactions} />
       <NewTransaction isOpen={isOpen} onRequestClose={handleCloseModal} />
     </div>
   );

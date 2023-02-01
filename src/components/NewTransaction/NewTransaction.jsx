@@ -3,29 +3,41 @@ import closeImg from "../../assets/cancel.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import { useState } from 'react';
-import './NewTransaction.css'
 import CurrencyInput from "react-currency-input-field";
+import { useDatabase } from "../../context/DatabaseContext";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
+import ptBR from 'date-fns/locale/pt-BR'
+import "react-datepicker/dist/react-datepicker.css";
+import './NewTransaction.css'
 
 export function NewTransaction({ isOpen, onRequestClose }) {
-
+    const { insert } = useDatabase();
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState();
     const [category, setCategory] = useState('');
     const [type, setType] = useState('deposito');
+    const [date, setDate] = useState(new Date())
+
+    registerLocale('br', ptBR)
 
     async function handleSubmit(event) {
         event.preventDefault();
-        // await createTransaction({
-        //     title,
-        //     amount,
-        //     category,
-        //     type,
-        // });
+        await insert({
+            schema: 'transactions',
+            data: {
+                title,
+                amount,
+                category,
+                type,
+                date
+            }
+        });
 
         setTitle('');
         setAmount(0);
         setType('deposito');
         setCategory('');
+        window.location.reload()
         onRequestClose();
     }
 
@@ -51,19 +63,21 @@ export function NewTransaction({ isOpen, onRequestClose }) {
                         value={title}
                         onChange={event => setTitle(event.target.value)}
                         placeholder="Titulo"
+                        required
                     />
 
                     <label htmlFor="value">Valor</label>
                     <CurrencyInput
                         id='value'
                         decimalsLimit={2}
-                        decimalSeparator=','
-                        groupSeparator="."
                         prefix="R$"
+                        groupSeparator="."
+                        decimalSeparator=","
                         intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
                         value={amount}
                         onValueChange={(value) => setAmount(value)}
                         placeholder="Valor"
+                        required
                     />
 
                     <div className="options">
@@ -80,7 +94,7 @@ export function NewTransaction({ isOpen, onRequestClose }) {
                                 type="radio"
                                 name="category"
                                 onClick={() => setType('deposito')}
-                                checked={type === 'deposito'}
+                                defaultChecked={type === 'deposito'}
                             />
                         </label>
 
@@ -103,18 +117,23 @@ export function NewTransaction({ isOpen, onRequestClose }) {
                             />
                         </label>
                     </div>
-
+                    <label htmlFor="date">Data</label>
+                    <ReactDatePicker
+                        dateFormat='dd/MM/yyyy'
+                        className="date-field"
+                        selected={date}
+                        onChange={setDate}
+                        locale='br'
+                    />
                     <label htmlFor="category">Categoria</label>
                     <input
                         id='category'
                         value={category}
                         onChange={event => setCategory(event.target.value)}
                         placeholder="Categoria"
+                        required
                     />
-
                     <button type="submit" className="submitButton"> Cadastrar </button>
-
-
                 </form>
             </div >
         </ReactModal >

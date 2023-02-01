@@ -1,31 +1,26 @@
-const { createContext, useState, useContext, useEffect } = require("react");
+
+const { createContext, useContext } = require("react");
 const { ipcRenderer } = window.require('electron');
-const { createRxDatabase } = require('rxdb');
-const { getRxStorageIpcRenderer } = require('rxdb/plugins/electron');
-const { getRxStorageMemory } = require('rxdb/plugins/memory');
+
 
 export const DatabaseContext = createContext({});
 
 export function DatabaseProvider(props) {
 
-    const [database, setDatabase] = useState();
+    const insert = async (data) => {
+        return await ipcRenderer.invoke('database:insert', data);
+    }
 
-    useEffect(() => {
-        createRxDatabase({
-            name: 'database',
-            storage: getRxStorageIpcRenderer({
-                key: 'main-storage',
-                statics: getRxStorageMemory().statics,
-                ipcRenderer: ipcRenderer
-            })
-        }).then((result) => setDatabase(result));
+    const fetch = async (data) => {
+        return await ipcRenderer.invoke('database:fetch', data);
+    }
 
-        console.log('conste')
-    }, [])
-
+    const exclude = async (data) => {
+        return await ipcRenderer.invoke('database:exclude', data);
+    }
 
     return (
-        <DatabaseContext.Provider value={{ database }}>
+        <DatabaseContext.Provider value={{ insert, fetch, exclude }}>
             {props.children}
         </DatabaseContext.Provider>
     )

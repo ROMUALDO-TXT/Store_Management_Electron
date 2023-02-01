@@ -11,9 +11,9 @@ body {
 }
 
 .react-modal-content {
-  margin: 10% auto;
+  margin: 5% auto;
   width: 50vw;
-  height: 75vh;
+  height: 85vh;
   background: #ffffff;
   position: relative;
   border-radius: 5px;

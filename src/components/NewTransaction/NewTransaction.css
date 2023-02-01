@@ -48,7 +48,7 @@
 }
 
 .transactionForm input {
-    width: 90%;
+    width: 90.2%;
     border: 1px solid rgba(0, 0, 0, 0.438);
     border-radius: 4px;
     padding: 10px;
@@ -57,7 +57,7 @@
 
 .transactionForm .options {
     width: 100%;
-    margin: 10px 15px;
+    margin: 10px 13px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -73,13 +73,32 @@
     border: 1px solid rgba(0, 0, 0, 0.438);
     border-radius: 4px;
     padding: 9px;
-    margin: 0 10px;
+    margin: 0 10.2px;
 
 }
 
 .transactionForm label {
     margin-left: 20px;
     margin-right: auto;
+}
+
+.react-datepicker__input-container {
+    padding: 0;
+    width: 80%;
+}
+
+.transactionForm .date-field {
+    width: 112.8%;
+    border: 1px solid rgba(0, 0, 0, 0.438);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.react-datepicker-wrapper {
+    display: inline-block;
+    padding-left: 2px;
+    width: 100%;
 }
 
 .transactionForm .submitButton {

@@ -9,16 +9,18 @@
 
 .navbar-menu {
     display: flex;
-    width: 90%;
+    width: 100%;
     flex-direction: row;
     height: 80px;
 }
 
 .Navbar .button-menu {
     width: 100%;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .navbar--logo {
@@ -33,11 +35,27 @@
 }
 
 .navbar-title {
-    margin-top: 20px;
+    margin: 20px 10px 0 auto
 }
 
 .navbar-title h1 {
     font-weight: 600;
     text-shadow: 1px 1px #00000031;
     color: #f5e6eb;
+}
+
+.month-select {
+    width: 24%;
+    border: 1px solid rgba(0, 0, 0, 0.438);
+    border-radius: 4px;
+    padding: 2px 10px;
+    margin: 26px 16% 0 0;
+}
+
+.month-select-label {
+    font-size: x-large;
+    font-weight: 600;
+    text-shadow: 1px 1px #00000031;
+    color: #f5e6eb;
+    margin: 22px 10px 0 auto;
 }
