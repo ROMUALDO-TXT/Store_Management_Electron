@@ -14,9 +14,7 @@ export function Balance({ transactions }) {
 
     transactions.forEach((transaction) => {
         let transactionDate = new Date(transaction.data.date);
-        console.log(localStorage.getItem('month') === transactionDate.getMonth());
-        if (localStorage.getItem('month') == transactionDate.getMonth()) {
-            console.log('aaa')
+        if (Number(localStorage.getItem('month')) === Number(transactionDate.getMonth())) {
             if (transaction.data.type === 'deposito') {
                 summary.deposits += Number(convert(transaction.data.amount))
             } else if (transaction.data.type === 'saque') {
@@ -24,7 +22,6 @@ export function Balance({ transactions }) {
             }
         }
     })
-    console.log(summary);
 
     function convert(data) {
         let datas = data.split(',');
