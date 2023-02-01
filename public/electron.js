@@ -11,11 +11,6 @@ const db = require('./db');
 let mainWindow;
 
 function createWindow() {
-    const startUrl = process.env.ELECTRON_START_URL || url.format({
-        pathname: path.join(__dirname, '../index.html'),
-        protocol: 'file:',
-        slashes: true,
-    });
 
     mainWindow = new BrowserWindow({
         width: 1000,
@@ -30,11 +25,11 @@ function createWindow() {
         }
     });
 
-    // if (process.env.NODE_ENV === 'dev') {
-    mainWindow.loadURL('http://localhost:3000');
-    // } else {
-    //     mainWindow.loadURL('file:///' + __dirname + "/index.html");
-    // }
+    if (process.env.NODE_ENV === 'dev') {
+        mainWindow.loadURL('http://localhost:3000');
+    } else {
+        mainWindow.loadURL('file:///' + __dirname + "/index.html");
+    }
 
     // mainWindow.webContents.openDevTools();
 
